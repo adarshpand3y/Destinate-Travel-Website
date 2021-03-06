@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+Search Results
+{% endblock title %}
+
+{% block body %}
+    <style>
+        .inner
+        {
+            overflow: hidden;
+        }
+        .inner img
+        {
+            transition: all 0.1s ease-out;
+        }
+        .inner:hover img
+        {
+            transform: scale(1.1);
+        }
+    </style>
+    <div class="container" style="padding-bottom: 200px;">
+        <h1 class="pt-2">Search results:-</h1>
+            {% if allPosts|length < 1 %}
+                <h3>No results found.</h3>
+                <h4>Oops! Your search <b>'{{query}}'</b> did not match any results.</h4>
+                <h4>Suggestions:-</h4>
+                <ul>
+                    <li>Make sure all the words are spelled correctly.</li>
+                    <li>Try different keywords.</li>
+                    <li>Try more general keywords.</li>
+                    <li>Try fewer keywords.</li>
+                </ul>
+            {% endif %}
+        <div class="row">
+            {% for i in allPosts %}
+                <div class="column mx-2 my-2" >
+                    <div class="card  h-100" style="width: 22rem;">
+                        <div class="inner">
+                            <img src="/media/{{i.image}}" class="card-img-top" alt="" style="width: 100%; height: 250px; object-fit: cover;">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">{{ i.picture_name }}</h5>
+                            <p class="card-text">{{i.description|truncatechars:150}}</p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">{{i.location}}</li>
+                            <li class="list-group-item">{{i.city}}</li>
+                            <li class="list-group-item">{{i.state}}</li>
+                        </ul>
+                        <div class="card-body">
+                            <a href="/image/{{i.id}}" class="btn btn-outline-primary">Know More</a>
+                            <a href="/image/{{i.id}}" class="btn btn-outline-secondary">{{i.views}} view(s)</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock body %}

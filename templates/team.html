@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+Our Team
+{% endblock title %}
+
+{% block body %}
+
+    <style>
+        .inner
+        {
+            overflow: hidden;
+        }
+        .inner img
+        {
+            transition: all 0.1s ease-out;
+        }
+        .inner:hover img
+        {
+            transform: scale(1.1);
+        }
+    </style>
+
+<div class="container-fluid px-0">
+    <div class="jumbotron">
+        <div class="container">
+        <h1 class="display-4">Hey, what's up?</h1>
+        <p class="lead">We are just some students who are showcasing our passion via this website.</p>
+        <p class="lead">We work hard to keep our standards up and ensure that you have a wonderful experience.</p>
+        <hr class="my-4">
+        <p>If you have any query/suggestion/feedback, feel free to contact us by clicking the button down below. We
+            would love to hear from you.</p>
+        <a class="btn btn-primary btn-lg" href="/contact" role="button">Contact Us</a>
+        </div>
+    </div>
+</div>
+<div class="container" style="padding-bottom:200px">
+    <h1>Our team members:-</h1>
+    <div class="row">
+        {% for member in members %}
+            <div class="card column mx-2 my-2" style="width: 16rem;">
+                <div class="inner">
+                    <img src="/media/{{member.image}}" style="width: 100%; height: 200px; object-fit: cover;" class="card-img-top" alt="{{member.name}}">
+                </div>
+                
+                <div class="card-body">
+                    <h5 class="card-title">{{member.name}}</h5>
+                    <h6 class="card-title">{{member.designation}}</h6>
+                    <a href="/member/{{member.id}}" class="btn btn-primary">Know More</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock body %}

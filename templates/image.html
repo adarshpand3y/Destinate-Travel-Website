@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+Images
+{% endblock title %}
+
+{% block body %}
+
+<div class="container" style="padding-top: 1vh; padding-bottom: 150px;">
+    <div class="card mb-3">
+  <img src="/media/{{post.image}}" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h3 class="card-title pb-2">{{post.picture_name}}</h3>
+    <h6 class="card-title">Location: {{post.location}}</h6>
+    <h6 class="card-title">Area: {{post.area}}</h6>
+    <h6 class="card-title">City: {{post.city}}</h6>
+    <h6 class="card-title">State: {{post.state}}</h6>
+    <p class="card-text">{{post.description}}</p>
+    <p class="card-text"><small class="text-muted">Last updated on {{post.pub_date}} | {{post.views}} view(s)</small></p>
+  </div>
+</div>
+</div>
+
+{% endblock body %}

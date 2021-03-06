@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+Images
+{% endblock title %}
+
+{% block body %}
+
+    <style>
+        .inner
+        {
+            overflow: hidden;
+        }
+        .inner img
+        {
+            transition: all 0.1s ease-out;
+        }
+        .inner:hover img
+        {
+            transform: scale(1.1);
+        }
+    </style>
+
+    <div class="container" style="padding-bottom: 200px;">
+        <h1 class="pt-2">Showing all Images:-</h1>
+        <div class="row">
+            {% for i in Post %}
+                <div class="column mx-2 my-2" >
+                    <div class="card  h-100" style="width: 22rem;">
+                        <div class="inner">
+                            <img src="/media/{{i.image}}" class="card-img-top" alt="" style="width: 100%; height: 250px; object-fit: cover;">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">{{ i.picture_name }}</h5>
+                            <h6 class="card-title">By <b>{{ i.posted_by }}</b></h6>
+                            <p class="card-text">{{i.description|truncatechars:150}}</p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">{{i.location}}</li>
+                            <li class="list-group-item">{{i.city}}</li>
+                            <li class="list-group-item">{{i.state}}</li>
+                        </ul>
+                        <div class="card-body">
+                            <a href="/image/{{i.id}}" class="btn btn-outline-primary">Know More</a>
+                            <a href="/image/{{i.id}}" class="btn btn-outline-secondary">{{i.views}} view(s)</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <center>
+        <div class="btn-group" role="group" aria-label="Basic example">
+            {% if Post.has_previous %}
+                <a type="button" href="images?page={{Post.previous_page_number}}" class="btn btn-secondary">PREV</a>
+            {% else %}
+                <a type="button" href="" class="btn btn-outline-secondary">PREV</a>
+            {% endif %}
+            
+            <button type="button" class="btn btn-dark">Page {{this_page_num}} of {{num_of_pages}}</button>
+
+            {% if Post.has_next %}
+                <a type="button" href="images?page={{Post.next_page_number}}" class="btn btn-secondary">NEXT</a>
+            {% else %}
+                <a type="button" href="" class="btn btn-outline-secondary">NEXT</a>
+            {% endif %}
+            
+        </div>
+        </center>
+    </div>
+{% endblock body %}
